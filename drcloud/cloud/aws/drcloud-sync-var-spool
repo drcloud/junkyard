@@ -1,0 +1,68 @@
+#!/bin/bash
+set -o errexit -o nounset -o pipefail
+function -h {
+cat <<USAGE
+ USAGE: sync-var-spool-drcloud
+
+  Synchronize the spool directory for Dr. Cloud, using environmental
+  credentails to access AWS services.
+
+USAGE
+}; function --help { -h ;}                 # A nice way to handle -h and --help
+export LC_ALL=en_US.UTF-8                    # A locale that works consistently
+export PATH=/usr/local/bin:"$PATH"
+
+spool=/var/spool/drcloud
+
+function main {
+  if [[ -t 2 ]]
+  then lock sync
+  else syslog lock sync
+  fi
+}
+
+function sync {
+  local s3="$(< /etc/drcloud/aws/s3)"
+  local service="$(< /etc/drcloud/service)"
+  mkdir -p "$spool"/i "$spool"/o "$spool"/misc
+  aws s3 sync "$spool"/o/ "$s3"/"$service"/o/
+  aws s3 sync --delete "$s3"/"$service"/i/ "$spool"/i/
+  aws s3 sync --delete "$s3"/"$service"/misc/ "$spool"/misc/
+}
+
+function lock {
+  mkdir -p "$spool"
+  local lock="$spool/lock" ident="pid $$ from $(date -u +%FT%TZ)" info=
+  if flock --wait 2.0 --exclusive 9
+  then
+    out "$ident" > "$lock"
+    "$@"
+  else
+    err "Not able to lock $lock. Is it held by $(< "$lock")?"
+  fi 9>> "$lock"
+}
+
+function syslog {
+  local tag="$(basename "$0")[$$]"
+  exec 1> >(logger -t "$tag" -p user.info)
+  exec 2> >(logger -t "$tag" -p user.notice)
+  exec "$0" "$@"
+}
+
+
+##################################################################### Utilities
+
+function msg { out "$*" >&2 ;}
+function err { local x=$? ; msg "$*" ; return $(( $x == 0 ? 1 : $x )) ;}
+function out { printf '%s\n' "$*" ;}
+
+# Handles "no-match" exit code specified by POSIX for filtering tools.
+function maybe { "$@" || return $(( $? == 1 ? 0 : $? )) ;}
+
+
+######################### Delegates to subcommands or runs main, as appropriate
+
+if declare -f -- "${1:-}" >/dev/null
+then "$@"
+else main "$@"
+fi

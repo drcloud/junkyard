@@ -1,0 +1,31 @@
+description "Syncrhonize Dr. Cloud queues"
+
+start on runlevel [2345]
+stop on runlevel [!2345]
+
+respawn
+respawn limit 10 20
+kill timeout 1
+
+console log
+
+pre-start script
+  set -o errexit
+  export PATH=/usr/local/bin:"$PATH"
+  for n in 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20
+  do
+    if which aws
+    then break
+    fi
+    sleep 1
+  done 1>/dev/null 2>/dev/null
+  which aws 1>/dev/null 2>/dev/null || stop
+end script
+
+script
+  set -o errexit
+  export PATH=/usr/local/bin:"$PATH"
+  while drcloud-sync-var-spool
+  do sleep 0.1
+  done
+end script

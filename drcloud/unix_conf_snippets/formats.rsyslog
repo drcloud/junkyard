@@ -1,0 +1,35 @@
+$PreserveFQDN on
+$RepeatedMsgReduction off
+$EscapeControlCharactersOnReceive off
+
+$FileOwner syslog
+$FileGroup syslog
+$FileCreateMode 0644
+$DirCreateMode 0755
+$Umask 0022
+$PrivDropToUser syslog
+$PrivDropToGroup syslog
+
+$template Full, "%timereported:::date-rfc3339% \
+                 %hostname% \
+                 %syslogfacility-text%.%syslogpriority-text% \
+                 %syslogtag% \
+                 %structured-data%%msg:::sp-if-no-1st-sp%\
+                 %msg:::drop-last-lf,space-cc%\n"
+$ActionFileDefaultTemplate Full
+
+$template CSVd, "%timereported:::date-rfc3339%,\
+                 %hostname%,\
+                 %syslogfacility-text%,\
+                 %syslogpriority-text%,\
+                 %app-name:::csv%,\
+                 %procid%,\
+                 %structured-data:::csv%,\
+                 %msg:::drop-last-lf,csv%\n"
+
+# One file per minute
+$template CSVf, "/var/log/csv/%hostname:::secpath-drop%/\
+                              %timereported:1:10:date-rfc3339%/\
+                              %timereported:12:16:date-rfc3339%.csv"
+
+*.* -?CSVf;CSVd

@@ -1,0 +1,91 @@
+#cloud-config
+
+drcloud:
+  cloud: &cloud ...
+  service: &service ...
+
+ubuntu:
+  sync_service: &sync_service ...
+  rx_service: &rx_service
+  rsyslog_conf: &rsyslog_conf ...
+
+aws:
+  s3: &s3 ...
+  sync_script: &sync_script ...
+
+
+############################# Generic stuff (uses refs to work with data above)
+
+preserve_hostname: true
+
+locale: en_US.UTF-8
+timezone: UTC
+
+write_files:
+  - path: /etc/drcloud/cloud
+    content: *cloud
+  - path: /etc/drcloud/service
+    content: *service
+  - path: /etc/drcloud/aws/s3
+    content: *s3
+
+  - path: /usr/local/bin/drcloud-sync-var-spool
+    permissions: '0755'
+    content: *sync_script
+
+  - path: /etc/init/drcloud-sync-var-spool.conf
+    content: *sync_service
+
+  - path: /etc/init/drcloud-rx.conf
+    content: *rx_service
+
+  - path: /etc/rsyslog.d/00-drcloud.conf
+    content: *rsyslog_conf
+
+bootcmd:
+  - ['cloud-init-per', instance, setfqdn, bash, '-c',
+        'echo  "$INSTANCE_ID"."$1" > /etc/hostname', bash,
+        *service]
+  - ['cloud-init-per', instance, getfqdn,
+        hostname, '--file', /etc/hostname]
+  - ['cloud-init-per', instance, clearhosts,
+        sed, '-i', '-e', '/^127.0.1.1/d', /etc/hosts]
+  - ['cloud-init-per', instance, sethosts, bash, '-c',
+        'echo 127.0.1.1 "$(< /etc/hostname)" "$INSTANCE_ID" >> /etc/hosts']
+
+runcmd:
+  - [pip, install, awscli, boto3, ptpython]
+  - [aws, s3, sync, '--delete', *s3, '/etc/spool/drcloud']
+  - [bash, '-c',
+     # We use this format to ensure Rx specific libs are installed.
+     'path="$(echo /var/spool/drcloud/misc/drcloud-*.*)" &&
+      pip install file://"$path"#egg=drcloud[rx]'
+    ]
+
+package_update: true
+package_upgrade: true
+packages:
+  - aptitude
+  - curl
+  - dnstracer
+  - dnsutils
+  - git
+  - htop
+  - httpie
+  - iotop
+  - jq
+  - make
+  - mosh
+  - multitail
+  - python-dev
+  - python-pip
+  - screen
+  - strace
+  - sysstat
+  - tayga
+  - tmux
+  - vim
+
+power_state:
+  mode: reboot
+  timeout: +2

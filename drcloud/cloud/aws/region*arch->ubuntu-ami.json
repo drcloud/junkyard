@@ -1,0 +1,112 @@
+{
+  "ap-northeast-1": {
+    "amd64XhvmXebs": "ami-9e5cff9e",
+    "amd64XhvmXebsXio1": "ami-a05cffa0",
+    "amd64XhvmXebsXssd": "ami-a25cffa2",
+    "amd64XhvmXephemeral": "ami-de5efdde",
+    "amd64Xebs": "ami-925cff92",
+    "amd64XebsXio1": "ami-985cff98",
+    "amd64XebsXssd": "ami-9c5cff9c",
+    "amd64Xephemeral": "ami-fa55f6fa"
+  },
+  "ap-southeast-1": {
+    "amd64XhvmXebs": "ami-ec7879be",
+    "amd64XhvmXebsXio1": "ami-927879c0",
+    "amd64XhvmXebsXssd": "ami-967879c4",
+    "amd64XhvmXephemeral": "ami-f07879a2",
+    "amd64Xebs": "ami-e27879b0",
+    "amd64XebsXio1": "ami-ea7879b8",
+    "amd64XebsXssd": "ami-ee7879bc",
+    "amd64Xephemeral": "ami-c4767796"
+  },
+  "eu-central-1": {
+    "amd64XhvmXebs": "ami-60f9c27d",
+    "amd64XhvmXebsXio1": "ami-62f9c27f",
+    "amd64XhvmXebsXssd": "ami-9cf9c281",
+    "amd64XhvmXephemeral": "ami-42fac15f",
+    "amd64Xebs": "ami-6ef9c273",
+    "amd64XebsXio1": "ami-6af9c277",
+    "amd64XebsXssd": "ami-66f9c27b",
+    "amd64Xephemeral": "ami-34fbc029"
+  },
+  "eu-west-1": {
+    "amd64XhvmXebs": "ami-7c4b0a0b",
+    "amd64XhvmXebsXio1": "ami-7a4b0a0d",
+    "amd64XhvmXebsXssd": "ami-664b0a11",
+    "amd64XhvmXephemeral": "ami-7842030f",
+    "amd64Xebs": "ami-8a4809fd",
+    "amd64XebsXio1": "ami-744b0a03",
+    "amd64XebsXssd": "ami-7e4b0a09",
+    "amd64Xephemeral": "ami-6a3f7e1d"
+  },
+  "sa-east-1": {
+    "amd64XhvmXebs": "ami-cd9518d0",
+    "amd64XhvmXebsXio1": "ami-cf9518d2",
+    "amd64XhvmXebsXssd": "ami-c99518d4",
+    "amd64XhvmXephemeral": "ami-1795180a",
+    "amd64Xebs": "ami-d99518c4",
+    "amd64XebsXio1": "ami-d59518c8",
+    "amd64XebsXssd": "ami-d39518ce",
+    "amd64Xephemeral": "ami-dd9815c0"
+  },
+  "us-east-1": {
+    "amd64XhvmXebs": "ami-cf35f3a4",
+    "amd64XhvmXebsXio1": "ami-cd35f3a6",
+    "amd64XhvmXebsXssd": "ami-c135f3aa",
+    "amd64XhvmXephemeral": "ami-5d25e336",
+    "amd64Xebs": "ami-fb35f390",
+    "amd64XebsXio1": "ami-f135f39a",
+    "amd64XebsXssd": "ami-cb35f3a0",
+    "amd64Xephemeral": "ami-9301c7f8"
+  },
+  "us-west-1": {
+    "amd64XhvmXebs": "ami-b33dccf7",
+    "amd64XhvmXebsXio1": "ami-bd3dccf9",
+    "amd64XhvmXebsXssd": "ami-bf3dccfb",
+    "amd64XhvmXephemeral": "ami-c13acb85",
+    "amd64Xebs": "ami-af3dcceb",
+    "amd64XebsXio1": "ami-ab3dccef",
+    "amd64XebsXssd": "ami-b13dccf5",
+    "amd64Xephemeral": "ami-2d37c669"
+  },
+  "cn-north-1": {
+    "amd64XhvmXebs": "ami-e24fd2db",
+    "amd64XhvmXebsXio1": "ami-de4fd2e7",
+    "amd64XhvmXebsXssd": "ami-d44fd2ed",
+    "amd64XhvmXephemeral": "ami-4e4fd277",
+    "amd64Xebs": "ami-a24fd29b",
+    "amd64XebsXio1": "ami-8e4fd2b7",
+    "amd64XebsXssd": "ami-f44fd2cd",
+    "amd64Xephemeral": "ami-064fd23f"
+  },
+  "us-gov-west-1": {
+    "amd64XhvmXebs": "ami-89cfafaa",
+    "amd64XhvmXebsXio1": "ami-8dcfafae",
+    "amd64XhvmXebsXssd": "ami-91cfafb2",
+    "amd64XhvmXephemeral": "ami-43cfaf60",
+    "amd64Xebs": "ami-45cfaf66",
+    "amd64XebsXio1": "ami-4dcfaf6e",
+    "amd64XebsXssd": "ami-81cfafa2",
+    "amd64Xephemeral": "ami-7bcfaf58"
+  },
+  "ap-southeast-2": {
+    "amd64XhvmXebs": "ami-2fce8b15",
+    "amd64XhvmXebsXio1": "ami-2dce8b17",
+    "amd64XhvmXebsXssd": "ami-21ce8b1b",
+    "amd64XhvmXephemeral": "ami-c5cf8aff",
+    "amd64Xebs": "ami-3dce8b07",
+    "amd64XebsXio1": "ami-35ce8b0f",
+    "amd64XebsXssd": "ami-29ce8b13",
+    "amd64Xephemeral": "ami-8dcd88b7"
+  },
+  "us-west-2": {
+    "amd64XhvmXebs": "ami-8d5b5dbd",
+    "amd64XhvmXebsXio1": "ami-8f5b5dbf",
+    "amd64XhvmXebsXssd": "ami-f15b5dc1",
+    "amd64XhvmXephemeral": "ami-355c5a05",
+    "amd64Xebs": "ami-975b5da7",
+    "amd64XebsXio1": "ami-9f5b5daf",
+    "amd64XebsXssd": "ami-875b5db7",
+    "amd64Xephemeral": "ami-ed5751dd"
+  }
+}

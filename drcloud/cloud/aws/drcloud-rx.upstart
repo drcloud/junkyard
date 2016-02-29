@@ -1,0 +1,12 @@
+description "Run Dr. Cloud agent"
+
+start on runlevel [2345]
+stop on runlevel [!2345]
+
+respawn
+respawn limit 10 20
+kill timeout 1
+
+console log
+
+exec drcloud --syslog rx
